@@ -122,7 +122,7 @@ void Game::drawGrid(){
       for(int i=0;i<10;i++){
           cout << static_cast<char>('A'+i) << " ";
           for(int j=0;j<10;j++){
-            /*Will replace characters of enemy's ships to '.'
+            /*Will display characters of enemy's ships as '.'
               Original contents stay the same*/
               if(arr[i][j]=='c'||arr[i][j]=='b'||arr[i][j]=='s'||arr[i][j]=='d'){
                 cout << "  " << '.';
@@ -247,12 +247,12 @@ void Player::updateGrid(Game&game,PC &enemy){
   bool error, oob;
   string logs;
   char spacing[27];
-  fill(spacing,spacing+27,'-');
+  fill(spacing,spacing+27,'-'); //Using fill STL to fill '-' 27 times
   cin>>vert>>horz;
   cout<<endl<<endl<<endl<<endl;
   //Error handling
   while(cin.fail()){
-    cout<<"Enter a correct format (ie A 5): ";
+    cout<<"Enter a correct format (i.e. A 5): ";
     cin.clear();
     cin>>vert>>horz;
     cout<<endl;
@@ -275,7 +275,7 @@ void Player::updateGrid(Game&game,PC &enemy){
     cin>>vert>>horz;
     //Error handling
     while(cin.fail()){
-      cout<<"Enter a correct format (ie A 5): ";
+      cout<<"Enter a correct format (i.e. A 5): ";
       cin.clear();
       cin>>vert>>horz;
       cout<<endl;
@@ -293,7 +293,7 @@ void Player::updateGrid(Game&game,PC &enemy){
     cin>>vert>>horz;
     //Error handling
     while(cin.fail()){
-      cout<<"Enter a correct format (ie A 5): ";
+      cout<<"Enter a correct format (i.e. A 5): ";
       cin.clear();
       cin>>vert>>horz;
       cout<<endl;
@@ -315,7 +315,7 @@ void Player::updateGrid(Game&game,PC &enemy){
       }
       //Error handling  
       while(cin.fail()){
-        cout<<"Enter a correct format (ie A 5): ";
+        cout<<"Enter a correct format (i.e. A 5): ";
         cin.clear();
         cin>>vert>>horz;
         cout<<endl;
@@ -355,9 +355,7 @@ void Player::updateGrid(Game&game,PC &enemy){
 
     //Displays an 'X' if misses a point and adds a "miss" sentence to the game logs
   else{
-    for(auto i=spacing;i!=spacing+27;i++){
-      cout<<*i;
-    }
+    for_each(spacing,spacing+27,printBarrier); //Using for_each STL
     cout<<endl<<endl<<"--Player's side: "<<endl<<endl;
     logs="";
     logs+="Player misses at point ";
@@ -468,7 +466,7 @@ void PC::updateGridE(Game&game,Player& p){
   eforbiddenChars.insert('!');
   eforbiddenChars.insert('%');
 
-  copy(letterchoices,letterchoices+10,copyletters);//Copy the original letter array to a new one
+  copy(letterchoices,letterchoices+10,copyletters);//Copy the original letter array to a new one(STL)
   random_shuffle(copyletters,copyletters+10);//Randomly switch places in the array
   int randomLetIndx=rand()%10;
   char vert=getletter(copyletters,randomLetIndx);

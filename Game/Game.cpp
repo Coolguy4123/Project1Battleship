@@ -114,13 +114,16 @@ void Game::printLogs(){
 /*Purpose is to print the grid of the game
  Prints all characters of the grid except the enemy ships*/
 void Game::drawGrid(){
+    char verticalChar[10]={'B','C','J','I','H','A','D','F','E','G'};
+    sort(verticalChar,verticalChar+10);
     cout << "    ";
     for(auto i:horzRow){
       cout << i << "  ";
     }
     cout << endl;
       for(int i=0;i<10;i++){
-          cout << static_cast<char>('A'+i) << " ";
+          //cout << static_cast<char>('A'+i) << " ";
+          cout<<verticalChar[i]<<" ";
           for(int j=0;j<10;j++){
             /*Will display characters of enemy's ships as '.'
               Original contents stay the same*/

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cctype>
+#include <algorithm>
 #include "Game.h"
 #include "Functions.h"
 #include <set>
@@ -42,6 +43,11 @@ void assign(Game&game, int shipSize,char shipChar){
   }
 }
 
+//Function used to print the barrier using the for_each STL
+void printBarrier(char c){
+    cout<<c;
+}
+
 //return the letter using the Game's class getLetter function
 char getletter(char* letterAry,int indx){
   return letterAry[indx];
@@ -63,26 +69,30 @@ bool collidesVert(Game&game,int rRow,int rCol,int shipSize){
 //Function to determine if the player hits a point of an enemy ship
 //Enemy's ships are in lower cases
 bool pdetermineHit(Game&game,int ver,int horz){
-if(game.getPos(ver,horz)=='c'||game.getPos(ver,horz)=='b'||game.getPos(ver,horz)=='s'||game.getPos(ver,horz)=='d'){
-    return true;
-  }
-  return false;
+    char hitchars[4]={'c','b','s','d'};
+    char c=game.getPos(ver,horz);
+    if(count(hitchars,hitchars+4,c)>0){//Using count STL to see if the target character is present
+        return true;
+    }
+    return false;
 }
 
 //Function to determine if the enemy hits a point of a player's ship
 //Players ship are in upper cases
 bool edetermineHit(Game&game,int ver, int horz){
-    if(game.getPos(ver,horz)=='C'||game.getPos(ver,horz)=='B'||game.getPos(ver,horz)=='S'||game.getPos(ver,horz)=='D'){
-    return true;
-  }
-  return false;
+    char hitchars[4]={'C','B','S','D'};
+    char c=game.getPos(ver,horz);
+    if(count(hitchars,hitchars+4,c)>0){//Using count STL to see if the target character is present
+        return true;
+    }
+    return false;
 }
 
 //Function for determining weather the player's given position is a valid position
 //Returns false if the position is '.'
 bool pdetermineError(Game& game,int ver,int horz,set<char> const &s){
   char c=game.getPos(ver,horz);
-  if(s.find(c)!=s.end()){
+  if(s.find(c)!=s.end()){//Using find STL to see if the given position is forbidden
     return true;
   }
   return false;
@@ -92,7 +102,7 @@ bool pdetermineError(Game& game,int ver,int horz,set<char> const &s){
 //Returns false if the position is '.'
 bool edetermineError(Game& game,int ver,int horz,set<char> const &s){
   char c=game.getPos(ver,horz);
-  if(s.find(c)!=s.end()){
+  if(s.find(c)!=s.end()){//Using find STL to see if the given position is forbidden
     return true;
   }
   return false;

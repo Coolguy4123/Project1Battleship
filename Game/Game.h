@@ -58,7 +58,6 @@ public:
 class Player {
 private:
   map<char, int> ships;
-  //set<char> forbiddenChars;
 
 public:
   Player();

@@ -19,6 +19,7 @@ extern "C" {
 #endif
     
 void assign(Game&,int,char);
+void printBarrier(char);
 bool collidesVert(Game&,int,int,int);
 bool collidesHorz(Game&,int,int,int);
 bool pdetermineHit(Game&,int,int);
